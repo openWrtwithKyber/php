@@ -1,15 +1,15 @@
 <?php
 session_start();
 
-// 🔹 검색 기록 배열 초기화
+// 검색 기록 배열 초기화
 if (!isset($_SESSION['history'])) {
     $_SESSION['history'] = [];
 }
 
-// 🔹 드롭다운 유지 여부
+// 드롭다운 유지 여부
 $keepOpen = false;
 
-// 🔹 삭제 처리
+// 삭제 처리
 $isDeleting = false;
 if (isset($_POST['delete_index'])) {
     $isDeleting = true;
@@ -22,7 +22,7 @@ if (isset($_POST['delete_index'])) {
     }
 }
 
-// 🔹 검색 처리
+// 검색 처리
 $searchQuery = "";
 if (!$isDeleting && isset($_GET['q'])) {
     $searchQuery = trim($_GET['q']);
@@ -74,7 +74,7 @@ body {
     font-size:18px;
 }
 
-/* 🔹 돋보기 */
+/* 돋보기 */
 .search-icon {
     position:absolute;
     right:15px;
@@ -107,7 +107,7 @@ body {
     right:0;
 }
 
-/* 🔹 드롭다운 */
+/* 드롭다운 */
 .dropdown {
     position:absolute;
     top:60px;
@@ -159,7 +159,7 @@ iframe {
 
 <div class="center-box">
 
-    <!-- 🔹 검색 폼 -->
+    <!-- 검색 폼 -->
     <form method="GET" id="searchForm">
         <div class="search-wrapper">
 
@@ -171,7 +171,7 @@ iframe {
                 <span class="search-icon" onclick="submitSearch()"></span>
             </div>
 
-            <!-- 🔹 드롭다운 -->
+            <!-- 드롭다운 -->
             <div class="dropdown" id="dropdown">
                 <?php
                 if (!empty($_SESSION['history'])) {
@@ -194,10 +194,10 @@ iframe {
         </div>
     </form>
 
-    <!-- 🔹 삭제용 폼 -->
+    <!-- 삭제용 폼 -->
     <form method="POST" id="deleteForm"></form>
 
-    <!-- 🔹 검색 결과 iframe -->
+    <!-- 검색 결과 iframe -->
     <?php if ($searchQuery !== ""): ?>
         <iframe src="https://www.google.com/search?q=<?= urlencode($searchQuery) ?>"></iframe>
     <?php endif; ?>
@@ -209,25 +209,25 @@ const input = document.getElementById('searchInput');
 const dropdown = document.getElementById('dropdown');
 const form = document.getElementById('searchForm');
 
-// 🔹 드롭다운 열기
+// 드롭다운 열기
 input.addEventListener('focus', () => { dropdown.style.display='block'; });
 
-// 🔹 바깥 클릭 시 닫기
+// 바깥 클릭 시 닫기
 document.addEventListener('click', (e) => {
     if(!e.target.closest('.search-wrapper')) dropdown.style.display='none';
 });
 
-// 🔹 검색어 클릭
+// 검색어 클릭
 function selectItem(value) {
     input.value = value;
 }
 
-// 🔹 돋보기 클릭
+// 돋보기 클릭
 function submitSearch() {
     form.submit();
 }
 
-// 🔹 삭제
+// 삭제
 function deleteItem(e, index) {
     e.stopPropagation();
     const form = document.getElementById('deleteForm');
@@ -235,7 +235,7 @@ function deleteItem(e, index) {
     form.submit();
 }
 
-// 🔹 삭제 후 드롭다운 유지
+// 삭제 후 드롭다운 유지
 <?php if ($keepOpen): ?>
 document.addEventListener('DOMContentLoaded', () => { dropdown.style.display='block'; });
 <?php endif; ?>
